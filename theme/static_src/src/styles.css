@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom-styles.css */
+.btn {
+  @apply bg-blue-600 text-white uppercase tracking-wide py-2 px-4 m-2 rounded-md;
+}
+
+li {
+    @apply hover:text-xl hover:text-blue-400 hover:cursor-pointer;
+}
+
+.container {
+    @apply mx-auto md:max-w-screen-xl sm:max-w-screen-sm;
+}
+
+.post_title {
+    @apply text-center font-semibold text-3xl uppercase tracking-widest;
+}
+
+.post_content {
+    @apply  text-lg font-normal tracking-wide;
+}
+
+.date_posted {
+    @apply text-blue-400
+}
+
+.event_title {
+    @apply font-semibold text-xl uppercase tracking-widest ;
+}
+
+.event_description {
+    @apply list-disc text-gray-900 font-normal 
+}
+
+.form_input {
+    @apply rounded border-2 border-gray-200 bg-gray-200 focus:border-purple-600 focus:bg-white focus:outline-none
+}

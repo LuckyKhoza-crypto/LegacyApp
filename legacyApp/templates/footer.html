@@ -1,0 +1,32 @@
+{% load static %}
+<footer class="mt-10 bg-green-950 text-white">
+    <div class=" py-3 px-2  sm:h-60 container mx-auto ">
+        <div class="mt-4 grid sm:grid-cols-12 gap-1 items-center text-center">
+            <div class="sm:col-span-3 sm:text-left">
+                <ul class="text-sm font-medium sm:text-lg flex flex-col space-y-3">
+                    <li>Newsletter</li>
+                    <li>Opportunities</li>
+                    <li>Events</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+
+            <div class="sm:col-span-5">
+                <form class="form-input bg-transparent border-transparent">
+                    <input type="email" placeholder="Enter your email" class="p-2 mb-3 sm:mb-0 text-sm sm:text-g rounded-sm">
+                    <button class="bg-green-500 text-white text-sm sm:text-l p-2 rounded-sm">Subscribe </button>
+                </form>
+            </div>
+
+            <div class="sm:col-span-4 mt-4 mx-auto items-center">
+                <img src="{% static 'images/logo.jpg' %}" alt="logo" class="rounded-sm">
+            </div>
+
+
+        </div>
+         <!-- copy right -->
+        <div class="mt-4 sm:me-28 text-center">
+            <p class="text-sm">© 2024 Legacy. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
