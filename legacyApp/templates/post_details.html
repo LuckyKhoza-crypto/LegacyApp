@@ -1,55 +1,61 @@
 {% extends 'base.html' %}
-
+{% load socialaccount %}
 {% load static %}
 {% load tailwind_filters %}
 {% block content %}
     <div class="container mx-auto p-2 prose lg:prose-xl mt-14 overflow-hidden">
-        <h3 class="post_title mb-2" > {{ post.title| title }} </h1>
-        <span class="date_posted">Posted
-            {{ post.created_date | timesince}}
-            ago by
-            {{ post.author |title }}</span>
+        {% if user.is_authenticated %}
+            <h1>Welcome, {{ user.username }}</h1>
 
-        {% if post.image %}
-            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+            <h3 class="post_title mb-2" > {{ post.title| title }} </h1>
+            <span class="date_posted">Posted
+                {{ post.created_date | timesince}}
+                ago by
+                {{ post.author |title }}</span>
+
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+            {% endif %}
+
+            <div class="post_content">
+                <p>{{ post.content |safe }}</p>
+            </div>
+            <hr class="mt-5" >
+            {% if events %}
+                <div class="mt-5">
+                    <h3 class="event_title " >Events</h3>
+                    <ul class="ms-5">
+                        {% for event in events %}
+                            <li class="event_description ">{{event.date| date:"N j, y"}} - {{event.time| date:"H:i"}}, {{event.location}} - {{ event.name }} <span> organized by {{ event.organizer }}</span>
+                                <p>
+                                    {{event.description | safe}}
+                                </p>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="">
+                <div class="text-center">
+                    <h3>Comments</h3>
+                </div>
+                <div>
+                    <form class="grid  grid-cols items-center" method="post" hx-post="{% url 'comments' post.id %}" hx-target="#comments_section" hx-swap="beforebegin">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+
+                        <button type="submit" class="btn text-ceter sm:w-fit text-sm ">
+                            Add Comment
+                        </button>
+                    </form>
+                </div>
+                <div id="comments_section">
+                    {% include 'partials/comments_list.html' %}
+                </div>
+            </div>
+        {% else %}
+            <h3 class="text-center"> <a href="{% provider_login_url 'google' %}?next={% url 'post_details' pk=post.id %}">Continue with Google</a></h3>
         {% endif %}
-
-        <div class="post_content">
-            <p>{{ post.content |safe }}</p>
-        </div>
-        <hr class="mt-5" >
-        {% if events %}
-            <div class="mt-5">
-                <h3 class="event_title " >Events</h3>
-                <ul class="ms-5">
-                    {% for event in events %}
-                        <li class="event_description ">{{event.date| date:"N j, y"}} - {{event.time| date:"H:i"}}, {{event.location}} - {{ event.name }} <span> organized by {{ event.organizer }}</span>
-                            <p>
-                                {{event.description | safe}}
-                            </p>
-                        </li>
-                    {% endfor %}
-
-                </ul>
-            </div>
-        {% endif %}
-        <div class="">
-            <div class="text-center">
-                <h3>Comments</h3>
-            </div>
-            <div>
-                <form class="grid  grid-cols items-center" method="post" hx-post="{% url 'comments' post.id %}" hx-target="#comments_section" hx-swap="beforebegin">
-                    {% csrf_token %}
-                    {{ form | crispy }}
-
-                    <button type="submit" class="btn text-ceter sm:w-fit text-sm ">
-                        Add Comment
-                    </button>
-                </form>
-            </div>
-            <div id="comments_section">
-                {% include 'partials/comments_list.html' %}
-            </div>
-        </div>
     </div>
 {% endblock %}

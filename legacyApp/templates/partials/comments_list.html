@@ -1,10 +1,10 @@
 {% for comment in comments %}
     <div class="bg-green-400 ps-2 pb-2 mb-4 rounded-md grid grid-cols-12 gap-2 prose items-center">
-    <p class="col-span-8 font-semibold items-center">
-        {{ comment.author }}
-        <span class="text-sm ms-3 font-normal">{{ comment.created_date|timesince }}</span>
-    </p>
-    <p class="col-span-12 prose" style="margin-top: -1.8rem;">{{ comment.content }}</p>
-</div>
+        <p class="col-span-8 font-semibold items-center">
+            {{ comment.author }}
+            <span class="text-sm ms-3 font-normal">{{ comment.created_date|timesince }}</span>
+        </p>
+        <p class="col-span-12 prose" style="margin-top: -1.8rem;">{{ comment.content }}</p>
+    </div>
 
 {% endfor %}
