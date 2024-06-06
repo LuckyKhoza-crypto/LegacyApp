@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    'legacyApp.middleware.CrossOriginOpenerPolicyMiddleware',
 ]
 
 ROOT_URLCONF = 'legacyProject.urls'
@@ -89,7 +90,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'legacyProject.wsgi.application'
 
-
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
